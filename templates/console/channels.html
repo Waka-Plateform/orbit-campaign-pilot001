@@ -1,0 +1,39 @@
+<section class="console-section-content" data-section="channels">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Channels</div>
+      <h1 class="orbit-title">Ressources canal</h1>
+      <p class="orbit-subtitle">Configurez email, SMS et agent texte. Sans sélection sauvegardée, aucun envoi n’est possible.</p>
+    </div>
+  </header>
+
+  <section class="channel-layout">
+    <nav class="channel-tabs" aria-label="Canaux activés">
+      <button type="button" data-channel-tab="email" class="is-active"><i class="bi bi-envelope"></i> Email</button>
+      <button type="button" data-channel-tab="sms"><i class="bi bi-chat-dots"></i> SMS</button>
+      <button type="button" data-channel-tab="agents_waka"><i class="bi bi-robot"></i> Agent texte</button>
+    </nav>
+    <div class="orbit-panel">
+      <div class="orbit-row-between">
+        <h2 id="channels-current-title" class="orbit-section-title">Email</h2>
+        <span id="channels-configured-badge" class="orbit-badge">Non configuré</span>
+      </div>
+      <form id="channels-form" class="channel-form"></form>
+      <div class="console-actions">
+        <button id="channels-create" class="orbit-button" type="button"><i class="bi bi-plus-lg"></i> Créer une ressource</button>
+        <button id="channels-save" class="orbit-button orbit-button-primary" type="button"><i class="bi bi-save"></i> Sauvegarder</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="console-modal-backdrop" id="channels-create-modal">
+    <div class="console-modal orbit-modal" role="dialog" aria-modal="true" aria-labelledby="channels-create-title">
+      <div class="orbit-row-between">
+        <h2 id="channels-create-title">Créer une ressource</h2>
+        <button class="orbit-button" type="button" data-channel-create-close><i class="bi bi-x-lg"></i> Fermer</button>
+      </div>
+      <div id="channels-create-body" class="orbit-stack"></div>
+    </div>
+  </div>
+</section>
+<script type="module" src="/static/js/channels.js"></script>
