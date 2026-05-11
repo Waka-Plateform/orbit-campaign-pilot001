@@ -1,0 +1,49 @@
+<section class="console-section-content" data-section="plan">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Plan</div>
+      <h1 class="orbit-title">Scheduler campagne</h1>
+      <p class="orbit-subtitle">La campagne démarre uniquement selon cette configuration : fenêtre horaire, throttling et batch size.</p>
+    </div>
+  </header>
+
+  <section class="orbit-panel orbit-stack">
+    <div class="orbit-row-between">
+      <h2 class="orbit-section-title">Statut runtime</h2>
+      <span id="plan-status" class="orbit-badge">scheduled</span>
+    </div>
+    <div class="orbit-grid-3">
+      <div class="console-stat"><span>Différés par fenêtre</span><strong id="plan-window-deferred">0</strong></div>
+      <div class="console-stat"><span>Throttled</span><strong id="plan-throttled">0</strong></div>
+      <div class="console-stat"><span>Batch size</span><strong id="plan-batch-label">0</strong></div>
+    </div>
+    <div class="console-actions">
+      <button class="orbit-button" type="button" data-plan-action="pause"><i class="bi bi-pause-fill"></i> Pause</button>
+      <button class="orbit-button" type="button" data-plan-action="resume"><i class="bi bi-play-fill"></i> Reprendre</button>
+      <button class="orbit-button orbit-button-primary" type="button" data-plan-action="start"><i class="bi bi-lightning-charge"></i> Démarrer maintenant</button>
+      <button class="orbit-button orbit-button-danger" type="button" data-plan-action="stop"><i class="bi bi-stop-fill"></i> Arrêter</button>
+    </div>
+  </section>
+
+  <form id="plan-form" class="orbit-panel orbit-stack">
+    <h2 class="orbit-section-title">Configuration d’envoi</h2>
+    <div class="orbit-grid-3">
+      <label class="orbit-label"><span>Début</span><input id="plan-start-at" class="orbit-input" type="datetime-local" name="start_at"></label>
+      <label class="orbit-label"><span>Fin optionnelle</span><input id="plan-end-at" class="orbit-input" type="datetime-local" name="end_at"></label>
+      <label class="orbit-label"><span>Fuseau horaire</span><select id="plan-timezone" class="orbit-select" name="timezone"></select></label>
+    </div>
+    <h3>Fenêtres autorisées</h3>
+    <div id="plan-windows" class="plan-windows"></div>
+    <button id="plan-add-window" class="orbit-button" type="button"><i class="bi bi-plus-lg"></i> Ajouter une fenêtre</button>
+    <h3>Throttle</h3>
+    <div class="orbit-grid-4">
+      <label class="orbit-label"><span>Max / minute</span><input id="plan-max-minute" class="orbit-input" type="number" min="0"></label>
+      <label class="orbit-label"><span>Max / heure</span><input id="plan-max-hour" class="orbit-input" type="number" min="0"></label>
+      <label class="orbit-label"><span>Max / jour</span><input id="plan-max-day" class="orbit-input" type="number" min="0"></label>
+      <label class="orbit-label"><span>Batch size</span><input id="plan-batch-size" class="orbit-input" type="number" min="1"></label>
+    </div>
+    <div class="console-actions"><button class="orbit-button orbit-button-primary" type="submit"><i class="bi bi-save"></i> Enregistrer le plan</button></div>
+  </form>
+</section>
+<script type="module" src="/static/js/sse.js"></script>
+<script type="module" src="/static/js/plan.js"></script>
