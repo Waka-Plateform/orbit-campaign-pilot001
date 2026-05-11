@@ -1,0 +1,32 @@
+<section class="console-section-content" data-section="dashboard">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Dashboard</div>
+      <h1 class="orbit-title">Analytique campagne</h1>
+      <p class="orbit-subtitle">KPI, tendances temporelles et breakdowns par canal, étape et audience.</p>
+    </div>
+  </header>
+
+  <section class="orbit-panel orbit-stack">
+    <div class="orbit-row-between">
+      <h2 class="orbit-section-title">KPIs</h2>
+      <div class="console-toolbar-row">
+        <label class="orbit-label"><span>Métrique</span><select id="dashboard-metric" class="orbit-select"><option value="delivery_rate">Délivrabilité</option><option value="sent">Envois</option><option value="replies">Réponses</option></select></label>
+        <label class="orbit-label"><span>Période</span><select id="dashboard-period" class="orbit-select"><option value="7d">7 jours</option><option value="30d">30 jours</option><option value="all">Tout</option></select></label>
+      </div>
+    </div>
+    <div id="dashboard-kpis" class="orbit-grid-4"></div>
+  </section>
+
+  <section class="orbit-grid-2">
+    <div class="orbit-panel">
+      <h2 class="orbit-section-title">Courbe temporelle</h2>
+      <svg id="dashboard-timeseries" class="chart-svg" role="img" aria-label="Courbe temporelle"></svg>
+    </div>
+    <div class="orbit-panel">
+      <h2 class="orbit-section-title">Breakdowns</h2>
+      <div id="dashboard-breakdowns" class="breakdown-list"></div>
+    </div>
+  </section>
+</section>
+<script type="module" src="/static/js/dashboard.js"></script>
