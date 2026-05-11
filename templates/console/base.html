@@ -1,0 +1,45 @@
+<section class="console-section-content" data-section="base">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Base contacts</div>
+      <h1 class="orbit-title">Contacts campagne</h1>
+      <p class="orbit-subtitle">Table paginée à 50 entrées, recherche, filtres par audience et export CSV.</p>
+    </div>
+  </header>
+
+  <div class="console-toolbar orbit-panel">
+    <label class="orbit-label"><span>Recherche</span><input id="base-search" class="orbit-input" type="search" placeholder="Nom, email, téléphone"></label>
+    <div class="console-toolbar-row">
+      <label class="orbit-label"><span>Audience</span><select id="base-audience" class="orbit-select"></select></label>
+      <button id="base-columns-open" class="orbit-button" type="button"><i class="bi bi-layout-three-columns"></i> Colonnes</button>
+      <a id="base-export" class="orbit-button" href="/api/console/base?export=csv"><i class="bi bi-download"></i> Export CSV</a>
+    </div>
+  </div>
+
+  <div class="orbit-table-wrap">
+    <table class="orbit-table" aria-describedby="base-status">
+      <thead><tr id="base-table-head"></tr></thead>
+      <tbody id="base-table-body"></tbody>
+    </table>
+  </div>
+  <div id="base-status" class="orbit-subtitle" role="status">Chargement.</div>
+  <div class="console-pagination">
+    <button class="orbit-button" type="button" data-page="first"><i class="bi bi-chevron-bar-left"></i> Début</button>
+    <button class="orbit-button" type="button" data-page="prev"><i class="bi bi-chevron-left"></i> Précédent</button>
+    <span id="base-page-label" class="orbit-badge">Page 1</span>
+    <button class="orbit-button" type="button" data-page="next">Suivant <i class="bi bi-chevron-right"></i></button>
+    <button class="orbit-button" type="button" data-page="last">Fin <i class="bi bi-chevron-bar-right"></i></button>
+  </div>
+
+  <div class="console-modal-backdrop" id="base-columns-modal">
+    <div class="console-modal orbit-modal" role="dialog" aria-modal="true" aria-labelledby="base-columns-title">
+      <div class="orbit-row-between">
+        <h2 id="base-columns-title">Sélecteur de colonnes</h2>
+        <button class="orbit-button" type="button" data-modal-close><i class="bi bi-x-lg"></i> Fermer</button>
+      </div>
+      <div id="base-columns-list" class="orbit-grid-2"></div>
+      <div class="console-actions"><button id="base-columns-save" class="orbit-button orbit-button-primary" type="button">Enregistrer</button></div>
+    </div>
+  </div>
+</section>
+<script type="module" src="/static/js/base.js"></script>
