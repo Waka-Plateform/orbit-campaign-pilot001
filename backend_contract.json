@@ -1,0 +1,63 @@
+{
+  "service": "orbit-campaign-pilot001",
+  "campaign_id": "d00ca9db-6544-46ae-a8d4-c6de76d5bfba",
+  "actions": [
+    {"node_id": "A", "channel": "email", "mode": "templated", "endpoint": "POST /actions/A/run", "artifact_ref": "art_email_A"},
+    {"node_id": "B", "channel": "sms", "mode": "templated", "endpoint": "POST /actions/B/run", "artifact_ref": "art_sms_B"}
+  ],
+  "channel_select_endpoints": [
+    {"kind": "email", "list_cascade": ["GET /api/channels/email/subscriptions", "GET /api/channels/email/{sub}/resource-groups", "GET /api/channels/email/{sub}/{rg}/email-services", "GET /api/channels/email/{svc}/domains", "GET /api/channels/email/{svc}/{domain}/senders"], "select": "POST /api/channels/email/select", "create": ["POST /api/channels/email/{svc}/domains/create", "POST /api/channels/email/{svc}/{domain}/senders/create"]},
+    {"kind": "sms", "list_cascade": ["GET /api/channels/sms/subscriptions", "GET /api/channels/sms/{sub}/resource-groups", "GET /api/channels/sms/{sub}/{rg}/communication-services", "GET /api/channels/sms/{svc}/phone-numbers"], "select": "POST /api/channels/sms/select", "create": ["POST /api/channels/sms/{svc}/phone-numbers/purchase"]},
+    {"kind": "agents_waka_text", "list_cascade": ["GET /api/channels/text/agents"], "select": "POST /api/channels/text/select", "create": []}
+  ],
+  "ui_provided_variables": {
+    "email": [
+      {"id": "email_subscription_id", "type": "string", "label": "Souscription Azure"},
+      {"id": "email_resource_group", "type": "string", "label": "Resource Group"},
+      {"id": "email_communication_service_id", "type": "string", "label": "Email Communication Service"},
+      {"id": "email_communication_service_endpoint", "type": "string", "label": "Endpoint ACS Email"},
+      {"id": "email_domain", "type": "string", "label": "Domaine"},
+      {"id": "email_sender_username", "type": "string", "label": "MailFrom username"},
+      {"id": "email_display_name", "type": "string", "label": "Display name"},
+      {"id": "email_reply_to", "type": "string", "label": "Reply-to optionnel"}
+    ],
+    "sms": [
+      {"id": "sms_subscription_id", "type": "string"},
+      {"id": "sms_resource_group", "type": "string"},
+      {"id": "sms_communication_service_id", "type": "string"},
+      {"id": "sms_communication_service_endpoint", "type": "string"},
+      {"id": "sms_phone_number", "type": "string"},
+      {"id": "sms_phone_number_kind", "type": "enum", "values": ["local", "toll-free", "short-code"]}
+    ],
+    "agents_waka": [
+      {"id": "agent_text_id", "type": "string", "source": "ConversationsDB.text_agents"}
+    ]
+  },
+  "source_edit_endpoints": {"list": "GET /api/console/sources", "read": "GET /api/console/sources/<id>", "patch": "PATCH /api/console/sources/<id>", "history": "GET /api/console/sources/<id>/history", "test": "POST /api/console/sources/<id>/test"},
+  "console_endpoints": [
+    {"section": "main", "method": "GET", "path": "/api/console/main"},
+    {"section": "base", "method": "GET", "path": "/api/console/base"},
+    {"section": "plan", "method": "GET", "path": "/api/console/plan"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/start"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/pause"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/resume"},
+    {"section": "plan", "method": "POST", "path": "/api/console/plan/stop"},
+    {"section": "sources", "method": "GET", "path": "/api/console/sources"},
+    {"section": "dashboard", "method": "GET", "path": "/api/console/dashboard"},
+    {"section": "inbox", "method": "GET", "path": "/api/console/inbox/email"},
+    {"section": "inbox", "method": "GET", "path": "/api/console/inbox/{channel}"},
+    {"section": "inbox", "method": "POST", "path": "/api/console/inbox/{msg_id}/reply"}
+  ],
+  "tracking_endpoints": [
+    {"path": "/track/open/<step_id>", "method": "GET"},
+    {"path": "/track/click/<step_id>", "method": "GET"},
+    {"path": "/unsubscribe/<contact_id>", "method": "GET"}
+  ],
+  "webhooks": [
+    {"source": "event_grid_acs_email", "path": "/webhooks/email/delivery"},
+    {"source": "event_grid_acs_sms", "path": "/webhooks/sms/event"},
+    {"source": "waka_agent", "path": "/webhooks/agent/<agent_id>"}
+  ],
+  "sse_streams": [{"path": "/events", "events": ["step.completed", "inbox.email.new", "kpi.updated"]}]
+}
