@@ -1,0 +1,60 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  SERVICE_NAME: orbit-campaign-pilot001
+  RESOURCE_GROUP: rg-orbit-campaign-pilot001
+  LOCATION: francecentral
+  ACR_NAME: crorbitplatform
+  ACR_SERVER: crorbitplatform.azurecr.io
+  IMAGE_NAME: orbit-campaign-pilot001
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push image
+        run: |
+          az acr login --name $ACR_NAME
+          IMAGE_TAG=${{ github.sha }}
+          docker build -t $ACR_SERVER/$IMAGE_NAME:$IMAGE_TAG .
+          docker push $ACR_SERVER/$IMAGE_NAME:$IMAGE_TAG
+          echo "IMAGE=$ACR_SERVER/$IMAGE_NAME:$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Deploy infrastructure
+        run: |
+          az deployment group create \
+            --resource-group $RESOURCE_GROUP \
+            --template-file infra/main.bicep \
+            --parameters \
+              containerImage=$IMAGE \
+              containerAppsEnvironmentId=${{ vars.CONTAINERAPPS_ENVIRONMENT_ID }} \
+              userAssignedIdentityId=${{ vars.CAMPAIGN_MANAGED_IDENTITY_ID }} \
+              cosmosEndpoint=${{ vars.COSMOS_ENDPOINT }} \
+              azureSubscriptionId=${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Ensure target port
+        run: |
+          az containerapp ingress enable --name $SERVICE_NAME --resource-group $RESOURCE_GROUP --type external --target-port 8000
+
+      - name: Smoke test
+        run: |
+          FQDN=$(az containerapp show --name $SERVICE_NAME --resource-group $RESOURCE_GROUP --query properties.configuration.ingress.fqdn -o tsv)
+          curl -fsS "https://$FQDN/health"
