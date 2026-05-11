@@ -36,6 +36,7 @@
   "source_edit_endpoints": {"list": "GET /api/console/sources", "read": "GET /api/console/sources/<id>", "patch": "PATCH /api/console/sources/<id>", "history": "GET /api/console/sources/<id>/history", "test": "POST /api/console/sources/<id>/test"},
   "console_endpoints": [
     {"section": "main", "method": "GET", "path": "/api/console/main"},
+    {"section": "main", "method": "GET", "path": "/api/console/main/flow.svg"},
     {"section": "base", "method": "GET", "path": "/api/console/base"},
     {"section": "plan", "method": "GET", "path": "/api/console/plan"},
     {"section": "plan", "method": "POST", "path": "/api/console/plan"},
@@ -44,10 +45,20 @@
     {"section": "plan", "method": "POST", "path": "/api/console/plan/resume"},
     {"section": "plan", "method": "POST", "path": "/api/console/plan/stop"},
     {"section": "sources", "method": "GET", "path": "/api/console/sources"},
+    {"section": "sources", "method": "GET", "path": "/api/console/sources/<id>"},
+    {"section": "sources", "method": "PATCH", "path": "/api/console/sources/<id>"},
+    {"section": "sources", "method": "GET", "path": "/api/console/sources/<id>/history"},
+    {"section": "sources", "method": "POST", "path": "/api/console/sources/<id>/test"},
+    {"section": "channels", "method": "GET", "path": "/api/console/channels"},
     {"section": "dashboard", "method": "GET", "path": "/api/console/dashboard"},
     {"section": "inbox", "method": "GET", "path": "/api/console/inbox/email"},
     {"section": "inbox", "method": "GET", "path": "/api/console/inbox/{channel}"},
     {"section": "inbox", "method": "POST", "path": "/api/console/inbox/{msg_id}/reply"}
+  ],
+  "runtime_endpoints": [
+    {"section": "health", "method": "GET", "path": "/health"},
+    {"section": "agent_text", "method": "GET", "path": "/api/agent/text/session"},
+    {"section": "orchestrator", "method": "POST", "path": "/api/orchestrator/tick"}
   ],
   "tracking_endpoints": [
     {"path": "/track/open/<step_id>", "method": "GET"},

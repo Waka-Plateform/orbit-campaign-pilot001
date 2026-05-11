@@ -7,6 +7,7 @@ from app.console.main import router as console_main_router
 from app.console.base import router as console_base_router
 from app.console.plan import router as console_plan_router
 from app.console.sources import router as console_sources_router
+from app.console.channels import router as console_channels_router
 from app.console.dashboard import router as console_dashboard_router
 from app.console.inbox import router as console_inbox_router
 from app.channels.email import router as email_channel_router
@@ -30,14 +31,39 @@ async def lifespan(app: FastAPI):
     try:
         yield
     finally:
-        stop.set(); pump_task.cancel()
+        stop.set()
+        pump_task.cancel()
 
 
-app = FastAPI(title="orbit-campaign-pilot001", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="orbit-campaign-pilot001", version="1.0.1", lifespan=lifespan)
 settings = get_settings()
-app.add_middleware(CORSMiddleware, allow_origins=["*"] if settings.allowed_origins == "*" else settings.allowed_origins.split(","), allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"] if settings.allowed_origins == "*" else settings.allowed_origins.split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-for r in [console_main_router, console_base_router, console_plan_router, console_sources_router, console_dashboard_router, console_inbox_router, email_channel_router, sms_channel_router, waka_agents_router, tracking_open_router, tracking_click_router, unsubscribe_router, webhook_email_router, webhook_sms_router, webhook_agent_router, sse_router]:
+for r in [
+    console_main_router,
+    console_base_router,
+    console_plan_router,
+    console_sources_router,
+    console_channels_router,
+    console_dashboard_router,
+    console_inbox_router,
+    email_channel_router,
+    sms_channel_router,
+    waka_agents_router,
+    tracking_open_router,
+    tracking_click_router,
+    unsubscribe_router,
+    webhook_email_router,
+    webhook_sms_router,
+    webhook_agent_router,
+    sse_router,
+]:
     app.include_router(r)
 
 
