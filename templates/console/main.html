@@ -1,0 +1,73 @@
+<section class="console-section-content" data-section="main" data-campaign-id="{{ campaign_id | default('d00ca9db-6544-46ae-a8d4-c6de76d5bfba') }}">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Campagne</div>
+      <h1 class="orbit-title" id="main-campaign-name">pilot001</h1>
+      <p class="orbit-subtitle" id="main-objective">Chargement du document campagne.</p>
+    </div>
+    <nav class="console-anchor-nav" aria-label="Sous-sections Main">
+      <a href="#presentation">Présentation</a>
+      <a href="#base-summary">Base</a>
+      <a href="#flow">Flow</a>
+      <a href="#metrics">Objectifs</a>
+    </nav>
+  </header>
+
+  <section id="presentation" class="console-section orbit-panel">
+    <div class="orbit-row-between">
+      <h2 class="orbit-section-title">Présentation campagne</h2>
+      <span class="orbit-badge" id="main-runtime-status">scheduled</span>
+    </div>
+    <div class="orbit-grid-3">
+      <div class="console-stat"><span>Tagline</span><strong id="main-tagline">Information CGV</strong></div>
+      <div class="console-stat"><span>Propriétaire</span><strong id="main-owner">Orbit</strong></div>
+      <div class="console-stat"><span>Go-live</span><strong id="main-golive">À planifier</strong></div>
+    </div>
+    <div class="console-actions">
+      <button class="orbit-button" type="button" data-main-action="pause"><i class="bi bi-pause-fill"></i> Pause</button>
+      <button class="orbit-button" type="button" data-main-action="resume"><i class="bi bi-play-fill"></i> Reprendre</button>
+      <button class="orbit-button orbit-button-danger" type="button" data-main-action="finish"><i class="bi bi-stop-fill"></i> Terminer</button>
+    </div>
+    <div class="orbit-card">
+      <h3>Journal de cycle de vie</h3>
+      <div id="main-lifecycle-log" class="orbit-stack"></div>
+    </div>
+  </section>
+
+  <section id="base-summary" class="console-section orbit-panel">
+    <div class="orbit-row-between">
+      <h2 class="orbit-section-title">Base</h2>
+      <a class="orbit-button" href="#base"><i class="bi bi-people"></i> Voir la base complète</a>
+    </div>
+    <div class="orbit-grid-3">
+      <div class="console-stat"><span>Contacts</span><strong id="main-contacts-count">0</strong></div>
+      <div class="orbit-row"><div class="console-donut" aria-label="Répartition par source"></div><div id="main-source-breakdown" class="orbit-stack"></div></div>
+      <div id="main-audience-breakdown" class="orbit-stack"></div>
+    </div>
+  </section>
+
+  <section id="flow" class="console-section orbit-panel">
+    <div class="orbit-row-between">
+      <h2 class="orbit-section-title">Diagramme du flow</h2>
+      <span class="orbit-badge orbit-badge-accent" id="main-flow-version">runtime</span>
+    </div>
+    <object id="main-flow-svg" class="console-flow-object" type="image/svg+xml" data="/api/console/main/flow.svg?mode=runtime" aria-label="Diagramme SVG du flow campagne"></object>
+    <p class="orbit-subtitle" id="main-flow-legend">Cliquez sur un nœud pour ouvrir la source associée.</p>
+  </section>
+
+  <section id="metrics" class="console-section orbit-panel">
+    <h2 class="orbit-section-title">Objectifs et métriques</h2>
+    <div id="main-success-metrics" class="orbit-grid-3"></div>
+  </section>
+
+  <div class="console-drawer-backdrop" data-drawer-close></div>
+  <aside class="console-drawer orbit-drawer" id="main-node-drawer" aria-hidden="true">
+    <div class="orbit-row-between">
+      <h2>Nœud du flow</h2>
+      <button class="orbit-button" type="button" data-drawer-close><i class="bi bi-x-lg"></i> Fermer</button>
+    </div>
+    <div id="main-node-content" class="orbit-stack"></div>
+  </aside>
+</section>
+<script type="module" src="/static/js/sse.js"></script>
+<script type="module" src="/static/js/plan.js"></script>
