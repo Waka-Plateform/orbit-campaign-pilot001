@@ -12,4 +12,4 @@ azure-communication-email==1.0.0
 azure-communication-sms==1.0.1
 azure-mgmt-resource==23.2.0
 azure-mgmt-subscription==3.1.1
-azure-mgmt-communication==3.0.0
+azure-mgmt-communication==2.2.0
