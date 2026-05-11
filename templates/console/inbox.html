@@ -1,0 +1,46 @@
+<section class="console-section-content" data-section="inbox">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Interactions</div>
+      <h1 class="orbit-title">Interactions unifiées</h1>
+      <p class="orbit-subtitle">Messages entrants et sortants par canal. Les réponses email partent via le sender ACS configuré pour la campagne.</p>
+    </div>
+  </header>
+
+  <nav class="inbox-tabs" aria-label="Canaux d’interactions">
+    <button class="orbit-button orbit-button-primary" type="button" data-inbox-channel="email"><i class="bi bi-envelope"></i> Email</button>
+    <button class="orbit-button" type="button" data-inbox-channel="sms"><i class="bi bi-chat-dots"></i> SMS</button>
+    <button class="orbit-button" type="button" data-inbox-channel="webhook"><i class="bi bi-diagram-3"></i> Webhook</button>
+  </nav>
+
+  <section class="console-toolbar orbit-panel">
+    <label class="orbit-label"><span>Recherche</span><input id="inbox-search" class="orbit-input" type="search" placeholder="Sujet, expéditeur, contenu"></label>
+    <div class="console-toolbar-row">
+      <label class="orbit-label"><span>Dossier</span><select id="inbox-folder" class="orbit-select"><option value="inbox">Inbox</option><option value="archive">Archive</option><option value="spam">Spam</option></select></label>
+      <button id="inbox-mark-read" class="orbit-button" type="button"><i class="bi bi-envelope-open"></i> Tout marquer lu</button>
+      <a id="inbox-export" class="orbit-button" href="/api/console/inbox/email?export=csv"><i class="bi bi-download"></i> Export CSV</a>
+    </div>
+  </section>
+
+  <section class="inbox-columns">
+    <div class="orbit-panel">
+      <h2 class="orbit-section-title">IN</h2>
+      <div id="inbox-in" class="message-list"></div>
+    </div>
+    <div class="orbit-panel">
+      <h2 class="orbit-section-title">OUT</h2>
+      <div id="inbox-out" class="message-list"></div>
+    </div>
+  </section>
+
+  <div class="console-drawer-backdrop" data-inbox-close></div>
+  <aside class="console-drawer orbit-drawer" id="inbox-drawer" aria-hidden="true">
+    <div class="orbit-row-between">
+      <h2 id="inbox-drawer-title">Message</h2>
+      <button class="orbit-button" type="button" data-inbox-close><i class="bi bi-x-lg"></i> Fermer</button>
+    </div>
+    <div id="inbox-drawer-body" class="orbit-stack"></div>
+  </aside>
+</section>
+<script type="module" src="/static/js/sse.js"></script>
+<script type="module" src="/static/js/inbox.js"></script>
