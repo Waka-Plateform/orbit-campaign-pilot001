@@ -1,0 +1,40 @@
+<section class="console-section-content" data-section="sources">
+  <header class="console-hero orbit-card">
+    <div>
+      <div class="orbit-kicker">Sources</div>
+      <h1 class="orbit-title">Templates et prompts</h1>
+      <p class="orbit-subtitle">Une ligne par étape éditable du flow. Les prochains envois utiliseront la version sauvegardée.</p>
+    </div>
+  </header>
+
+  <section class="orbit-panel">
+    <div class="orbit-row-between">
+      <h2 class="orbit-section-title">Artefacts campagne</h2>
+      <button id="sources-refresh" class="orbit-button" type="button"><i class="bi bi-arrow-clockwise"></i> Actualiser</button>
+    </div>
+    <div id="sources-list" class="sources-list"></div>
+  </section>
+
+  <div class="console-drawer-backdrop" data-sources-close></div>
+  <aside class="console-drawer orbit-drawer" id="sources-drawer" aria-hidden="true">
+    <div class="orbit-row-between">
+      <h2 id="sources-drawer-title">Source</h2>
+      <button class="orbit-button" type="button" data-sources-close><i class="bi bi-x-lg"></i> Fermer</button>
+    </div>
+    <div id="sources-drawer-body" class="orbit-stack"></div>
+  </aside>
+
+  <div class="console-modal-backdrop" id="sources-regenerate-modal">
+    <div class="console-modal orbit-modal" role="dialog" aria-modal="true" aria-labelledby="sources-regenerate-title">
+      <div class="orbit-row-between">
+        <h2 id="sources-regenerate-title">Régénérer avec IA</h2>
+        <button class="orbit-button" type="button" data-regenerate-close><i class="bi bi-x-lg"></i> Fermer</button>
+      </div>
+      <label class="orbit-label"><span>Instruction one-shot</span><textarea id="sources-regenerate-instruction" class="orbit-textarea" placeholder="Précisez l’amélioration souhaitée"></textarea></label>
+      <div class="console-actions">
+        <button id="sources-regenerate-submit" class="orbit-button orbit-button-primary" type="button"><i class="bi bi-stars"></i> Régénérer</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="module" src="/static/js/sources.js"></script>
